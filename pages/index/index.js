@@ -1,5 +1,5 @@
 import { request } from "../../request/index.js";
-
+import regeneratorRuntime from "../../lib/runtime/runtime";
 Page({
   /**
    * 页面的初始数据
@@ -23,34 +23,48 @@ Page({
   },
 
   // 轮播图数据
-  getSwiperList() {
-    request({
-      url: "https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata"
-    }).then(result => {
-      let {message} = result.data;
-      this.setData({
-        swiperList: message
-      });
+  async getSwiperList() {
+    // request({
+    //   url: "/home/swiperdata"
+    // }).then(result => {
+    //   let {message} = result.data;
+    //   this.setData({
+    //     swiperList: message
+    //   });
+    // });
+    const res = await request({url:"/home/swiperdata"});
+    this.setData({
+      swiperList: res
     });
   },
-  getNavList() {
-    request({
-      url: "https://api-hmugo-web.itheima.net/api/public/v1/home/catitems"
-    }).then(result => {
-      let {message} = result.data;
-      this.setData({
-        catesList: message
-      });
+  // 导航数据
+  async getNavList() {
+    // request({
+    //   url: "/home/catitems"
+    // }).then(result => {
+    //   let {message} = result.data;
+    //   this.setData({
+    //     catesList: message
+    //   });
+    // });
+    const res = await request({url: "/home/catitems"});
+    this.setData({
+      catesList: res
     });
   },
-  getFloorList() {
-    request({
-      url: "https://api-hmugo-web.itheima.net/api/public/v1/home/floordata"
-    }).then(result => {
-      let {message} = result.data;
-      this.setData({
-        floorList: message
-      });
+  // 楼层数据
+  async getFloorList() {
+    // request({
+    //   url: "/home/floordata"
+    // }).then(result => {
+    //   let {message} = result.data;
+    //   this.setData({
+    //     floorList: message
+    //   });
+    // });
+    const res = await request({url: "/home/floordata"});
+    this.setData({
+      floorList: res
     });
   }
 })

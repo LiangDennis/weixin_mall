@@ -1,4 +1,5 @@
 import { request } from "../../request/index.js";
+import regeneratorRuntime from "../../lib/runtime/runtime";
 // pages/category/index.js
 Page({
 
@@ -43,21 +44,34 @@ Page({
   },
 
   // 获取分类数据
-  getCates() {
-    request({url: 'https://api-hmugo-web.itheima.net/api/public/v1/categories'}).then(res=> {
-      this.Cates = res.data.message;
+  async getCates() {
+    // request({url: '/categories'}).then(res=> {
+    //   this.Cates = res.data.message;
 
-      // 缓存数据 存入本地存储
-      wx.setStorageSync("cates", {time:Date.now(), data:this.Cates});
+    //   // 缓存数据 存入本地存储
+    //   wx.setStorageSync("cates", {time:Date.now(), data:this.Cates});
 
-      // 构造左边的菜单数据
-      let leftMenuList = this.Cates.map(v=>v.cat_name);
-      // 构造右边的商品数据
-      let rightContent = this.Cates[0].children;
-      this.setData({
-        leftMenuList,
-        rightContent
-      });
+    //   // 构造左边的菜单数据
+    //   let leftMenuList = this.Cates.map(v=>v.cat_name);
+    //   // 构造右边的商品数据
+    //   let rightContent = this.Cates[0].children;
+    //   this.setData({
+    //     leftMenuList,
+    //     rightContent
+    //   });
+    // });
+    const res = await request({url:'/categories'});
+    this.Cates = res;
+    // 缓存数据 存入本地存储
+    wx.setStorageSync("cates", {time:Date.now(), data:this.Cates});
+
+    // 构造左边的菜单数据
+    let leftMenuList = this.Cates.map(v=>v.cat_name);
+    // 构造右边的商品数据
+    let rightContent = this.Cates[0].children;
+    this.setData({
+      leftMenuList,
+      rightContent
     });
   },
   // 左侧菜单栏的点击事件

@@ -131,6 +131,18 @@
       3.  当点击事件发生的时候设置scrollTop的值为0
       4.  注意，直接给scroll-top设置为固定值是不会起作用的。
 
+#### 优化接口代码 提取公共接口路径 使用async，await 将res.data.message提取出来
+  1. 在request中定义公共接口路径
+  2. 修改页面请求接口的路径
+  3. 在请求前拼接路径
+  4. 使用async，await语法
+     1. 勾选ES6转ES5
+     2. 下载 https://github.com/LiangDennis/regenerator/blob/master/packages/regenerator-runtime/runtime.js
+     3. 在小程序中创建新文件夹lib/runtime/runtime.js
+     4. 在使用async的页面的js文件中都引入（不能全局引入）：import regeneratorRuntime from '../../lib/runtime/runtime.js'
+     5. 删除runtime中最后的try-catch块
+     6. 注意：在一些老机型中有可能不起作用
+
 #### 小程序编译模式的使用
   1. 可以对特定的页面使用编译模式，提高开发效率
 

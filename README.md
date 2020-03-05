@@ -145,10 +145,28 @@
 
 #### 小程序编译模式的使用
   1. 可以对特定的页面使用编译模式，提高开发效率
+  2. 编译时候还可以设定参数
 
 #### 一些在vscode上使用快速生成css的用法，会有提示，直接enter
   1. d:flex --- display: flex;
   2. jc:cen --- justify-content: center;
   3. ai:cen --- align-items: center;
-  4. bl+ --- border-left: default
+
+#### 商品列表页面
+  1. 在商品分类中跳转，在navigator中使用url="/pages/goods_list/index?cid={{item.cat_id}}"的方式跳转并传递cid参数
+  2. 在onload的生命周期方法中使用其定义的参数options可以获取到传递的数据
+  3. 实现
+     1. 自定义组件
+        1. 自定义tabs组件
+        2. 定义样式类和并获取从父组件传递过来的值，父组件传值方式tabs="{{tabs}}"
+        3. 定义点击事件bindtap="handleItemTap"，设置参数data-index="{{index}}"
+        4. 组件js中的方法获取索引值e.currentTarget.dataset
+        5. 触发父组件的事件 自定义，this.triggerEvent("eventName",{data});
+        6. 父组件中通过bindeventName的方式自定义一个方法
+        7. 这个方法中index在e.detail中
+        8. 缓存data中的tabs数据方式：let {tabs} = this.data;使用foreach的方式设置isActive的值，最后setdata
+        9. 插槽
+           1.  在子组件中使用slot标签
+           2.  在父组件中使用block标签和wx:if,wx:elif的方式定义不同的区域
+     2. 上拉加载，下拉刷新
 

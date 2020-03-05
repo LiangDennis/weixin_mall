@@ -168,5 +168,10 @@
         9. 插槽
            1.  在子组件中使用slot标签
            2.  在父组件中使用block标签和wx:if,wx:elif的方式定义不同的区域
+        10. 内容过长时使用省略符号表示
+            1.  display: -webkit-box;
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
      2. 上拉加载，下拉刷新
 

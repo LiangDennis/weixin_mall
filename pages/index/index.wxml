@@ -1,0 +1,52 @@
+<view class="yg_index">
+  <!-- 搜索框 开始 -->
+  <SearchInput></SearchInput>
+  <!-- 搜索框 结束 -->
+  <!-- 轮播图 开始 -->
+  <view class="index_swiper">
+    <swiper indicator-dots autoplay circular >
+      <swiper-item
+        wx:for="{{swiperList}}"
+        wx:key="goods_id"
+      >
+        <navigator>
+          <image mode="widthFix" src="{{item.image_src}}">
+          </image>
+        </navigator>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 轮播图 结束 -->
+  <!-- 导航栏 开始 -->
+  <view class="index_cates">
+    <navigator wx:for="{{catesList}}" wx:key="name">
+      <image src="{{item.image_src}}" mode="widthFix">
+      </image>
+    </navigator>
+  </view>
+  <!-- 导航栏 结束 -->
+  <!-- 楼层 开始 -->
+  <view class="index_floor">
+    <!-- 楼层1 -->
+    <view
+      class="floor_group" 
+      wx:for="{{floorList}}" 
+      wx:key="name" 
+      wx:for-item="item1" 
+      wx:for-index="index1">
+      <!-- 标题 -->
+      <view class="floor_title">
+        <image src="{{item1.floor_title.image_src}}" mode="widthFix">
+        </image>
+      </view>
+      <!-- 内容 -->
+      <view class="floor_content" >
+        <navigator wx:for="{{item1.product_list}}" wx:key="name" wx:for-item="item2" wx:for-index="index2">
+          <image src="{{item2.image_src}}" mode="{{index2===0?'widthFix':'scaleToFill'}}" >
+          </image>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <!-- 楼层 结束 -->
+</view>

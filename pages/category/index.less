@@ -1,0 +1,62 @@
+page {
+  // 为屏幕看到的高度
+  height: 100%;
+}
+.cates {
+  // 继承page的高度
+  height: 100%;
+  .cates_container {
+    // 那么该容器的高度等于父容器的高度 - 搜索组件的高度 90rpx
+    // 使用calc需要注意使用~号，否则编译不正确
+    // 设置了 100% 就是整个视图窗口的大小，而不会因为内容长而滚动
+    height: ~'calc(100vh - 90rpx)';
+    display: flex;
+    .left_menu {
+      // 由于使用了伸缩盒子，所以子项 高度 100%，flex的默认属性
+      flex: 2;
+      .menu_item {
+        // 设置小菜单的高度
+        height: 80rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30rpx;
+      }
+      .active {
+        color: var(--themeColor);
+        border-left: 5rpx solid currentColor;
+      }
+    }
+    .right_content {
+      flex: 5;
+      // 底部空间更大，优化体验
+      padding-bottom: 100rpx;
+      .goods_group {
+        .goods_title {
+          // 高度等于左边一个菜单的高度
+          height: 80rpx;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .delimiter {
+            color: #ccc;
+            padding: 0 10rpx;
+          }
+          .title {}
+        }
+        .goods_list {
+          display: flex;
+          flex-wrap: wrap;
+          navigator {
+            width: 33.33%;
+            text-align: center;
+            image {
+              width: 50%;
+            }
+            .goods_name {}
+          }
+        }
+      }
+    }
+  }
+}

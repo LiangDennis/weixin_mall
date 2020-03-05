@@ -3,51 +3,22 @@
   <Tabs tabs="{{tabs}}" bindtabsItemChange="haldleTabsItemChange">
     <block wx:if="{{tabs[0].isActive}}">
       <view class="first_tab">
-        <navigator class="goods_item">
+        <navigator class="goods_item"
+          wx:for="{{goodsList}}"
+          wx:key="goods_id"
+        >
           <!-- 左边 图片容器 -->
           <view class="goods_img_wrap">
-            <image src="https://api-hmugo-web.itheima.net/full/2fb113b32f7a2b161f5ee4096c319afedc3fd5a1.jpg" mode="widthFix" >
+            <image src="{{item.goods_small_logo?item.goods_small_logo:'https://ww1.sinaimg.cn/large/007rAy9hgy1g24by9t530j30i20i2glm.jpg'}}" mode="widthFix" >
             </image>
           </view>
           <!-- 右边 商品容器 -->
           <view class="goods_info_wrap">
             <view class="goods_name">
-              海信（lellsls）lsldkfjsdii 50英寸 4k超高清智能电视 HDR超博曲面
+              {{item.goods_name}}
             </view>
             <view class="goods_price">
-              ￥999
-            </view>
-          </view>
-        </navigator>
-        <navigator class="goods_item">
-          <!-- 左边 图片容器 -->
-          <view class="goods_img_wrap">
-            <image src="https://api-hmugo-web.itheima.net/full/2fb113b32f7a2b161f5ee4096c319afedc3fd5a1.jpg" mode="widthFix" >
-            </image>
-          </view>
-          <!-- 右边 商品容器 -->
-          <view class="goods_info_wrap">
-            <view class="goods_name">
-              海信（lellsls）lsldkfjsdii 50英寸 4k超高清智能电视 HDR超博曲面 这是一个非常好的电视，超级超级超级好好好的电视哦
-            </view>
-            <view class="goods_price">
-              ￥999
-            </view>
-          </view>
-        </navigator>
-        <navigator class="goods_item">
-          <!-- 左边 图片容器 -->
-          <view class="goods_img_wrap">
-            <image src="https://api-hmugo-web.itheima.net/full/2fb113b32f7a2b161f5ee4096c319afedc3fd5a1.jpg" mode="widthFix" >
-            </image>
-          </view>
-          <!-- 右边 商品容器 -->
-          <view class="goods_info_wrap">
-            <view class="goods_name">
-              海信（lellsls）lsldkfjsdii 50英寸 4k超高清智能电视 HDR超博曲面
-            </view>
-            <view class="goods_price">
-              ￥999
+              ￥{{item.goods_price}}
             </view>
           </view>
         </navigator>

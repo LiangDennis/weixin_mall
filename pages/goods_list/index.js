@@ -7,7 +7,8 @@
       4. 假如还有下一页数据 加载下一页数据
  */
 import { request } from "../../request/index.js";
-import regeneratorRuntime from "../../lib/runtime/runtime";Page({
+import regeneratorRuntime from "../../lib/runtime/runtime";
+Page({
   data: {
     tabs: [
       {

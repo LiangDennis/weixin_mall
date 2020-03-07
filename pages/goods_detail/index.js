@@ -27,6 +27,7 @@ Page({
       }
     });
   },
+  // 轮播图的预览
   handlePreviewImage(e) {
     // 1.构造要预览图片的数组
     const urls = this.goodsInfo.pics.map(v=>v.pics_mid);
@@ -35,6 +36,30 @@ Page({
     wx.previewImage({
       current, //首先预览
       urls // 需要预览的图片数组
+    });
+  },
+  // 点击 加入购物车
+  handleCartAdd() {
+    // 1. 获取缓存中的数据，第一次为空，需要转换
+    let cart = wx.getStorageSync("cart")||[];
+    // 2. 判断
+    let index = cart.findIndex(v=>v.goods_id===this.goodsInfo.goods_id);
+    if(index === -1) {
+      // 3.不存在，第一次添加
+      this.goodsInfo.num = 1;
+      cart.push(this.goodsInfo);
+    }else {
+      // 4.已经存在 num++
+      cart[index].num++;
+    }
+    // 5.重新填充缓存
+    wx.setStorageSync("cart", cart);
+    // 6. 弹窗提示
+    wx.showToast({
+      title: '加入成功',
+      icon: 'success',
+      // 防止用户连续多次点击
+      mask: true
     });
   }
 })

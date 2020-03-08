@@ -47,6 +47,7 @@ Page({
     if(index === -1) {
       // 3.不存在，第一次添加
       this.goodsInfo.num = 1;
+      this.goodsInfo.checked = true;
       cart.push(this.goodsInfo);
     }else {
       // 4.已经存在 num++

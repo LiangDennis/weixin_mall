@@ -44,7 +44,7 @@ export const chooseAddress=()=> {
   });
 }
 /**
- * promise 形式 chooseAddress
+ * promise 形式 showModal
  * params content
  */
 export const showModal=({content})=> {
@@ -58,6 +58,19 @@ export const showModal=({content})=> {
       fail: (err)=> {
         reject(err);
       }
+    });
+  });
+}
+/**
+ * promise 形式 showToast
+ * params title
+ */
+export const showToast=({title})=> {
+  return new Promise((resolve, reject)=> {
+    wx.showToast({
+      title: title,
+      icon: 'none',
+      mask: true,
     });
   });
 }

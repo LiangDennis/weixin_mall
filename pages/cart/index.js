@@ -1,4 +1,4 @@
-import { getSetting, openSetting, chooseAddress, showModal } from "../../utils/asyncWx";
+import { getSetting, openSetting, chooseAddress, showModal, showToast } from "../../utils/asyncWx";
 import regeneratorRuntime from "../../lib/runtime/runtime";
 Page({
   data: {
@@ -104,5 +104,42 @@ Page({
       totalNum
     });
     wx.setStorageSync("cart", cart);
+  },
+  // 支付
+  async handlePay() {
+    // 可以通过 data中的address 和 totalNum 来知道地址信息是否完善和是否有商品
+    let {address, totalNum} = this.data;
+    if(!address.userName) {
+      await showToast({title:"没有地址"});
+      return ;
+    }
+
+    if (totalNum===0) {
+      await showToast({title: '没有商品'});
+      return ;
+    }
+
+    wx.navigateTo({
+      url: '/pages/pay/index',
+    });
   }
+  // handlePay() {
+  //   // 1. 地址 和 购物车数据 是否有数据
+  //   let {address, cart} = this.data;
+  //   if(!address) {
+  //     wx.showToast({
+  //       title: '没有地址',
+  //       icon: 'none'
+  //     });
+  //   }else if(cart.length===0) {
+  //     wx.showToast({
+  //       title: '没有商品',
+  //       icon: 'none'
+  //     });
+  //   }else {
+  //     wx.navigateTo({
+  //       url: '/pages/pay/index',
+  //     });
+  //   }
+  // }
 })

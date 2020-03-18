@@ -81,6 +81,13 @@
 					"pathName": "pages/cart/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付页面",
+					"pathName": "pages/pay/index",
+					"query": "goods_id=43986",
+					"scene": null
 				}
 			]
 		}

@@ -1,2 +1,38 @@
-<!--pages/pay/index.wxml-->
-<text>pages/pay/index.wxml</text>
+<!-- 支付页面 收货地址 -->
+<view class="addres_info_wrap">
+  <view class="address_info">
+    <view class="address_user">收货人：{{address.userName}}</view>
+    <view class="address">{{address.all}}</view>
+  </view>
+  <view class="address_phone">{{address.telNumber}}</view>
+</view>
+
+<!-- 支付页面 商品信息 -->
+<view class="goods_info_wrap">
+  <view class="goods_info_title">购物车</view>
+  <view class="goods_item"
+    wx:for="{{cart}}"
+    wx:key="goods_id"
+  >
+    <image mode="widthFix" src="{{item.goods_small_logo?item.goods_small_logo:'https://ww1.sinaimg.cn/large/007rAy9hgy1g24by9t530j30i20i2glm.jpg'}}">
+    </image>
+    <view class="goods_info">
+      <view class="goods_name">{{item.goods_name}}</view>
+      <view class="goods_price_wrap">
+        <view class="goods_price">￥{{item.goods_price}}</view>
+        <view class="goods_num">X{{item.num}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 支付页面 底部工具栏 -->
+<view class="footer_btm_tools">
+  <view class="total_price">
+    <view>
+      合计：<text class="price_text">￥{{totalPrice}}</text>
+    </view>
+    <view>包含运费</view>
+  </view>
+  <view class="btn_pay">支付({{totalNum}})</view>
+</view>

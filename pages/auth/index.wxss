@@ -1,1 +1,5 @@
-/* pages/auth/index.wxss */
+.auth_btn {
+  margin-top: 40rpx;
+  width: 70%;
+  font-weight: normal;
+}

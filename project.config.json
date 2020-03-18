@@ -88,6 +88,12 @@
 					"pathName": "pages/pay/index",
 					"query": "goods_id=43986",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "授权",
+					"pathName": "pages/auth/index",
+					"scene": null
 				}
 			]
 		}

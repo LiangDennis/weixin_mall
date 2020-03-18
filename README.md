@@ -302,3 +302,26 @@
       4.  地址和购物车可以从缓存 或者 data中获取
           1.  缓存使用wx.getStorageSync("key")的方式
           2.  data 使用的 是 let {key} = this.data; 直接使用 this.key 是获取不到的
+
+#### 支付页面
+1. 创建订单
+   1. 需要获取到用户的token，的组成需要用到的信息
+      1. 用户信息，getUserInfo
+      2. 小程序登录成功后的信息，wx-login
+2. 支付按钮
+   1. 判断缓存中有没有token
+      1. 没有token 跳转授权页面，获取token
+      2. 有token， 执行逻辑
+         1. 创建订单，获取订单号，order_number
+            1. 封装发送请求的data，获取的res进行解构。
+         2. 预支付，使用订单号发送请求，获取到pay值 
+            1. pay对象值对应着wx.requestPayment的微信内置支付参数
+         3. 发起微信支付wx.requestPayment
+         4. 查询后台支付状态，参数order_number
+         5. 支付成功之后，从缓存中删除选中的商品，重新更新缓存
+
+#### 使用ES7 语法 需要注意使用trycatch块来捕获异常
+
+#### 优化接口请求 封装的优化
+1. 判断是否含有某个字段，请求的私有路径 那么就带上 header token
+2. 需要解构传递过来的header，防止header写死后不能修改

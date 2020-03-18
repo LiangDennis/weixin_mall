@@ -25,4 +25,15 @@ Page({
       totalNum
     });
   },
+  handleOrderPay() {
+    // 1. 判断有没有token
+    const token = wx.getStorageSync("token");
+    if(!token) {
+      wx.navigateTo({
+        url: '/pages/auth/index',
+      });
+      return;
+    }
+    console.log("have token");
+  }
 })

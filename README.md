@@ -325,3 +325,8 @@
 #### 优化接口请求 封装的优化
 1. 判断是否含有某个字段，请求的私有路径 那么就带上 header token
 2. 需要解构传递过来的header，防止header写死后不能修改
+
+#### login 页面 与 个人中心页面 user
+1. 设置统一背景颜色 page {background-color: #666}
+
+#### navigator 标签细节，url使用的是/pages/login/index，最前面应该有一个斜杠开头

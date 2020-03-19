@@ -1,1 +1,6 @@
 /* pages/login/index.wxss */
+.login_btn {
+  margin-top: 40rpx;
+  width: 70%;
+  font-weight: normal;
+}

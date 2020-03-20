@@ -328,5 +328,36 @@
 
 #### login 页面 与 个人中心页面 user
 1. 设置统一背景颜色 page {background-color: #666}
+2. 子元素设置的边框大小会影响父元素的边框，导致border-radius被覆盖
+3. 跳转时传递参数给订单页面
+
+#### 订单页面
+1. 页面被打开的时候 onShow （因为订单页面是频繁触发）
+   1. 获取url上的参数type
+   2. 根据type 去发送请求获取订单数据
+   3. 渲染页面
+2. 点击不同的标题 重新发送请求来获取和渲染数据
+3. onShow 与 onLoad 生命周期函数，其中的形参options可以在onLoad中获取到，但是不能在onShow中获取到。
+4. 在onShow中获取到options参数
+   1. 获取小程序当前的页面栈-数组，最多保存10个
+      1. 方式：const pages = getCurrentPages()
+   2. 数组中 索引最大的页面是当前页面
+      1. let currentPage = pages[pages.length-1]
+      2. currentPage 中有options 对象
+   3. 判断是否有token，没有跳转 权限页面
+   4. 给原来的数组对象添加新的属性，该属性同时是数组对象中的某个属性生成的。
+      1. arrObj = arrObj.map(v=> ({...v, otherTime: v.time }))
+      2. 说明，以上是一个数组中的各个元素，这些元素都是一个对象
+      3. 通过map方式遍历里面每一个元素，但不是遍历对象
+      4. 然后用一个小括号包裹，这是返回的内容
+      5. 里面使用...解构对象，同时最后添加一个对象
+      6. 其实，后半部分为
+         1. let obj = [name: 's', age: '12'];
+         2. obj = {...obj, sex: 'female'}
+   5. 修改时间的格式
+      1. 将时间戳转换为中文格式
+      2. let time = Date.now();
+      3. time = new Date(time).toLocalString()
+      4. 格式如下："2020/3/20 下午5:19:12"
 
 #### navigator 标签细节，url使用的是/pages/login/index，最前面应该有一个斜杠开头

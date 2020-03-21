@@ -38,6 +38,9 @@ page {
   align-items: center;
   border-left: 1rpx solid #999;
 }
+.goods_name_row .goods_collect .icon-shoucang_line {
+  color: orangered;
+}
 .goods_name_row .goods_collect .collect_text {
   color: #333;
 }

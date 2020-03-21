@@ -3,12 +3,16 @@ import regeneratorRuntime from "../../lib/runtime/runtime";
 Page({
 
   data: {
-    goodsObj:{}
+    goodsObj:{},
+    isCollect: false
   },
   // 商品对象，由于goodsObj是在异步请求中，所以无法直接获取到值
   goodsInfo:{},
 
-  onLoad: function (options) {
+  onShow: function () {
+    // 1. 修改onShow 多次进入 需要获取收藏值
+    const pages =  getCurrentPages();
+    const options = pages[pages.length-1].options;
     const {goods_id} = options;
     this.getGoodsDetail(goods_id);
   },
@@ -17,6 +21,10 @@ Page({
   async getGoodsDetail(goods_id) {
     const goodsObj = await request({url: "/goods/detail",data:{goods_id}});
     this.goodsInfo = goodsObj;
+    // 2. 缓存中获取收藏 有可能是空数组 商品收藏
+    const collect = wx.getStorageSync("collect")||[];
+    // 3. 判断当前商品是否收藏 商品收藏
+    let isCollect = collect.some(v=> v.goods_id===this.goodsInfo.goods_id);
     this.setData({
       // 优化页面只渲染的属性
       goodsObj: {
@@ -24,7 +32,8 @@ Page({
         goods_introduce: goodsObj.goods_introduce.replace(/\.webp/g, ".jpg"),
         goods_price: goodsObj.goods_price,
         pics:goodsObj.pics
-      }
+      },
+      isCollect
     });
   },
   // 轮播图的预览
@@ -62,5 +71,36 @@ Page({
       // 防止用户连续多次点击
       mask: true
     });
+  },
+  // 点击 收藏
+  handleCollect() {
+    // 1. 缓存中的收藏
+    let collect = wx.getStorageSync("collect")||[];
+    // 2. 是否包含该商品 以及位置
+    const index = collect.findIndex(v=>v.goods_id===this.goodsInfo.goods_id);
+    // 3. 是否存在
+    if(index!==-1) {
+      // 存在该商品
+      collect.splice(index,1);
+      wx.showToast({
+        title: '取消成功',
+        icon: 'success',
+        mask: true,
+      });
+    }else {
+      // 不存在该商品
+      collect.push(this.goodsInfo);
+      wx.showToast({
+        title: '收藏成功',
+        icon: 'success',
+        mask: true,
+      });
+    }
+    // 4. 修改isCollect
+    this.setData({
+      isCollect: !this.data.isCollect
+    });
+    // 5. 存放回缓存中 放在最后一步，删除了或添加了都需要缓存
+    wx.setStorageSync("collect", collect);
   }
 })

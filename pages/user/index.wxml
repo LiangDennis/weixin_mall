@@ -68,9 +68,9 @@
         <text>联系客服</text>
         <text>300-1928-3320</text>
       </view>
-      <view class="app_info_item">
+      <navigator class="app_info_item" url="/pages/feedback/index">
         意见反馈
-      </view>
+      </navigator>
       <view class="app_info_item">
         关于我们
       </view>

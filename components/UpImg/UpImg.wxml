@@ -1,0 +1,5 @@
+<view class="up_img_wrap">
+  <image src="{{src}}" bindtap="handleImagePreview" data-index="{{index}}"></image>
+  <icon bindtap="handleImageDelete" type="clear" size="23" color="red" data-index="{{index}}">
+  </icon>
+</view>

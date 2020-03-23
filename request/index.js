@@ -9,7 +9,12 @@ export const request = (params)=>{
   });
 
   // 定义公共的url
-  const baseUrl = "https://api-hmugo-web.itheima.net/api/public/v1";
+  let baseUrl = "https://api-hmugo-web.itheima.net/api/public/v1";
+  // 图片上传到图床
+  if(params.url==="http://images.ac.cn/api/upload") {
+    baseUrl = '';
+  }
+  
   return new Promise((resolve, reject)=> {
     var reqTask = wx.request({
       ...params,

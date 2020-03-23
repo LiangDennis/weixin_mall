@@ -389,3 +389,27 @@
    1. 防抖 一般放在输入框中，防止重复输入 重复发送请求
    2. 定时器id
    3. 节流 下拉上拉
+
+#### 意见反馈页面
+1. 设置外层的父容器背景颜色，而不设置textarea的背景颜色，因为textarea 偏大
+2. 修改button 默认样式，修改了button的color和background-color属性后，点击状态的属性没有了，重新定义一个点击状态属性，button:active {background-color: rgba(x,x,x,0.8)}
+3. 创建一个组件，组件尽量简洁，方便使用，没有太多的数据和方法调用，高内聚，低耦合。
+4. 使用组件的使用没有很好的办法修改里面的样式，应该在该组件外在添加一层父容器。
+5. 小程序的组件跟vue一样，接收参数需要声明type和value
+6. 小程序的按钮存在padding和margin的默认样式，会对样式有影响。
+7. 小程序内置的选择图片的api
+   1. count 同时选中图片的数量
+   2. sizeType 图片的格式 原图 压缩
+   3. sourceType 图片的来源 相册 照相机
+   4. 最后需要对已有的图片进行结构，而不是重新赋值
+8. 添加了父子组件通信的方式来实现图片的删除
+   1. 父组件 绑定图片src, 当前图片的index
+   2. 子组件 绑定点击事件 绑定data-index当前图片索引 向父组件发送事件 this.triggerEvent("EventName", {data}, {options})
+   3. 父组件执行删除
+9. 添加了父子组件通信的方式来实现图片的预览
+   1.  父组件 绑定图片src, 当前图片的index
+   2.  子组件 绑定点击事件 绑定data-index当前图片索引 向父组件发送事件
+   3.  父组件通过内置api 实现预览 wx.previewImage({current: imgs[current], urls: imgs})
+   4.  图床更新，需要传递的图片需要为file类型
+   5.  小程序的图片能够转换成base64图片，无法转换成file类型图片
+   

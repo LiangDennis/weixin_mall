@@ -40,7 +40,10 @@ Page({
   totalPage: 1,
 
   onLoad: function (options) {
-    this.QueryParams.cid = options.cid;
+    this.QueryParams.cid = options.cid||'';
+    this.QueryParams.query = options.query||'';
+    console.log(options);
+    
     this.getGoodsList();
   },
 

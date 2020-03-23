@@ -33,6 +33,10 @@ Page({
     //   });
     // });
     const res = await request({url:"/home/swiperdata"});
+    // 将main替换成index
+    res.forEach(v=>{
+      v.navigator_url = v.navigator_url.replace("main","index");
+    })
     this.setData({
       swiperList: res
     });
@@ -63,6 +67,11 @@ Page({
     //   });
     // });
     const res = await request({url: "/home/floordata"});
+    res.forEach(v1=>{
+      v1.product_list.forEach(v2=>{
+        v2.navigator_url = v2.navigator_url.replace("goods_list", "goods_list/index")
+      })
+    });
     this.setData({
       floorList: res
     });
